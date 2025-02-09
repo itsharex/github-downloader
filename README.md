@@ -24,7 +24,7 @@ Usage:
     -r, --recursive         Recursive create directory, file save path like: 
                             'https:/github.com/<user>/<repo>/releases/
                             download/<version-tag>/<filename>'
-                            Default path like: '<user>__<repo>/<filename>'
+                            Default path like: '<name>/<filename>'
     --dry-run               Dry run with HTTP head method (do not download)
 
 用法: 
@@ -36,7 +36,7 @@ Usage:
     -r, --recursive         递归的创建目录，文件保存路径: 
                             'https:/github.com/<user>/<repo>/releases/
                             download/<version-tag>/<filename>'
-                            默认路径: '<user>__<repo>/<filename>'
+                            默认路径: '<name>/<filename>'
     --dry-run               用 http 的 head 方法试运行（不下载文件）
 ```
 
@@ -71,23 +71,26 @@ Usage:
         "file_list": [
             "drawio-amd64-{stripped_version}.deb"
         ]
+    },
+    // ...
+    "name": {
+        "repo": "user/repo",
+        "file_list": [
+            "name_{stripped_version}.deb"
+        ]
     }
 }
 ```
 
 说明：
 
-- `"repo": xxx`  
-github 仓库名，形如：user/repo。
+- `"name`  
+程序名称，唯一标识，会作为默认保存目录的名称。
+- `"repo": user/repo`  
+github 仓库地址，包括用户名和仓库名。
 - `"file_list": []`  
 文件名列表，可包含以下变量。
-- `{version_tag}`  
-用于代替文件名中和 Releases Tag 相同的部分。
-- `{stripped_version}`  
-用于一些 Tag 是 `v1.1.0`，但是文件名中是 `1.1.0` 的情况。
-
-## Todo
-
-- [x] `-p, --proxy <url>` 使用 Github 下载代理
-- [x] `-d, --dir <data_dir>` 指定仓库配置所在目录
-- [x] `-t, --thread <number>` 设置并发数量
+    - `{version_tag}`  
+    用于代替文件名中和 Releases Tag 相同的部分。
+    - `{stripped_version}`  
+    用于一些 Tag 是 `v1.1.0`，但是文件名中是 `1.1.0` 的情况。

@@ -34,7 +34,7 @@ func Check(name string, repo config.GithubRepo, localVersion string) (versionTag
 		if config.Config["recursive"] {
 			fileDir = filepath.Join(config.OutputDir, releasesDownloadUrl, versionTag)
 		} else {
-			fileDir = filepath.Join(config.OutputDir, strings.ReplaceAll(repo.Repo, "/", "__"))
+			fileDir = filepath.Join(config.OutputDir, name)
 		}
 		if _, err := os.Stat(fileDir); os.IsNotExist(err) {
 			if err := os.MkdirAll(fileDir, 0755); err != nil {
